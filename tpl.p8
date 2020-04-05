@@ -1,18 +1,42 @@
 pico-8 cartridge // http://www.pico-8.com
 version 18
 __lua__
+
+player={
+	x=0,
+	y=0,
+	t=function(self)
+	end
+}
+
+function init()
+	start(player)
+end
+
+function tick()
+	cls(0)
+end
+
+
+-->8
+ent={}
+
 function start(e)
 	if e.i then
-		e.i()
+		e:i()
 	end
 	add(ent,e)
+end
+
+function _init()
+	init()
 end
 
 function _update()
 	tick()
 	i=1
 	while i<=#ent do
-		ent[i].t()
+		ent[i]:t()
 		if ent[i].d then
 			del(ent,ent[i])
 		else
@@ -20,23 +44,6 @@ function _update()
 		end
 	end
 end
-
--- game code
-
-ent={}
-
-player={
-	x=0,
-	y=0,
-	t=function()
-	end
-}
-start(player)
-
-function tick()
-	cls(0)
-end
-
 
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
